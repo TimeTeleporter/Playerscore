@@ -1,0 +1,4 @@
+imi, 3
+michi, 2
+eli, 0
+rehu, 0
