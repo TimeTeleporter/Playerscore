@@ -25,8 +25,19 @@ impl Playerlist for Vec<Player> {
 
         let mut vec: Vec<Player> = Vec::new();
         for line in content.lines() {
-            let (name, wins) = line.split(", ").collect_tuple().unwrap();
-            let wins: u32 = wins.parse().unwrap();
+            let (name, wins) = match line.split(", ").collect_tuple() {
+                Some(result) => result,
+                None => {
+                    continue;
+                }
+            };
+            let wins: u32 = match wins.parse() {
+                Ok(result) => result,
+                Err(e) => {
+                    println!("{}", e);
+                    continue;
+                }
+            };
             vec.push(Player {name: name.to_string(), wins: wins});
         }
 
